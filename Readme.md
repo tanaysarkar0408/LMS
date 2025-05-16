@@ -70,7 +70,7 @@ To set up the backend (once developed):
 
 ## Project Structure
 - **`/client`**: Frontend code (React, Tailwind CSS, Vite)
-  - See the [Client README](./client/README.md) for details.
+  - See the [Client README](./client) for details.
 - **`/server`** (planned): Backend code (Node.js, Express, MongoDB)
 - **`/docs`**: Documentation files
 
