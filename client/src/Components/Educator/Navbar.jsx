@@ -1,5 +1,5 @@
 import React from 'react'
-import { dummyEducatorData } from '../../assets/assets'
+import { assets, dummyEducatorData } from '../../assets/assets'
 import {UserButton, useUser} from '@clerk/clerk-react'
 
 const Navbar = () => {
@@ -8,8 +8,18 @@ const Navbar = () => {
   const {user} = useUser()
 
   return (
-    <div>
+    <div className='flex items-center justify-between px-4 md:px-8 border-b border-gray-500 py-3'>
       
+       <h1 onClick={()=>{
+        navigate('/')
+        scrollTo(0,0)
+      }} className="font-semi-bold w-28 lg:w-32 cursor-pointer">
+        L M S by TANAY
+      </h1>
+      <div className='flex items-center gap-5 text-gray-500 relative'>
+        <p>Hi! {user ? user.fullName : 'Developers'}</p>
+        {user ? <UserButton /> : <img className='max-w-8' src={assets.profile_img} />}
+      </div>
     </div>
   )
 }

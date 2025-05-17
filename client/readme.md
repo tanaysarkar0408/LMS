@@ -1,14 +1,21 @@
-# LMS Student Frontend
+# LMS Student & Educator Frontend
 
 ## Overview
-This is the student frontend for a Learning Management System (LMS) built using **React**, **Tailwind CSS**, and **Vite**. It provides an interface for students to access educational resources, view courses, manage enrollments, and interact with the platform. The project uses React Router for navigation and is styled with Tailwind CSS for a modern, responsive design.
+This is the frontend for a Learning Management System (LMS) built using **React**, **Tailwind CSS**, and **Vite**. It provides interfaces for both students and educators to interact with the platform. Students can access educational resources, view courses, and manage enrollments, while educators can create courses, manage their content, and view enrolled students. The project uses React Router for navigation and is styled with Tailwind CSS for a modern, responsive design.
 
 ## Features
-- View and enroll in courses
-- Access course details and sections
-- Manage student enrollments
-- Responsive design with Tailwind CSS
-- Client-side routing with React Router
+- **Student Features**:
+  - View and enroll in courses
+  - Access course details and sections
+  - Manage student enrollments
+- **Educator Features**:
+  - Create and add new courses
+  - View and manage their own courses
+  - Access a dashboard for educator-specific actions
+  - View students enrolled in their courses
+- **General Features**:
+  - Responsive design with Tailwind CSS
+  - Client-side routing with React Router
 
 ## Tech Stack
 - **React**: JavaScript library for building user interfaces
@@ -26,7 +33,7 @@ Before setting up the project, ensure you have the following installed:
 1. **Clone the Repository**
    ```bash
    git clone <repository-url>
-   cd client
+   cd lms-student-frontend
    ```
 
 2. **Install Dependencies**
@@ -68,11 +75,15 @@ Before setting up the project, ensure you have the following installed:
     - `AppContext.jsx`
   - **`/pages`**: Page components for routing
     - **`/educator`**: Educator-specific pages
+      - `AddCourse.jsx`
       - `CourseDetails.jsx`
       - `CoursesList.jsx`
+      - `Dashboard.jsx`
+      - `Educator.jsx`
       - `Home.jsx`
       - `MyCourses.jsx`
       - `MyEnrollments.jsx`
+      - `StudentsEnrolled.jsx`
     - **`/student`**: Student-specific pages
       - `CoursesList.jsx`
       - `Home.jsx`
@@ -91,14 +102,21 @@ The app uses React Router for navigation. Key routes include:
 - `/my-enrollments`: Student enrollments
 - `/educator`: Educator dashboard
 - `/educator/add-course`: Add a new course (educator)
-- `/my-courses`: Student's enrolled courses
+- `/educator/dashboard`: Educator dashboard
+- `/educator/students-enrolled`: View enrolled students (educator)
+- `/my-courses`: Student's enrolled courses or educator's created courses
 - `/student-enrolled`: List of enrolled students (educator)
 
 ## Usage
-- **Home Page**: Access the main landing page with a hero section and featured courses.
-- **Courses**: Browse and view course details, including sections and ratings.
-- **Enrollments**: Manage your enrollments and view enrolled courses.
-- **Educator Dashboard**: Add and manage courses if you're an educator.
+- **Student Interface**:
+  - **Home Page**: Access the main landing page with a hero section and featured courses.
+  - **Courses**: Browse and view course details, including sections and ratings.
+  - **Enrollments**: Manage your enrollments and view enrolled courses.
+- **Educator Interface**:
+  - **Dashboard**: Access the educator dashboard for an overview.
+  - **Add Course**: Create and publish new courses.
+  - **My Courses**: View and manage courses you've created.
+  - **Students Enrolled**: See the list of students enrolled in your courses.
 
 ## Available Scripts
 - `npm run dev`: Start the development server

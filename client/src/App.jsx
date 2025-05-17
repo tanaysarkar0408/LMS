@@ -12,6 +12,7 @@ import AddCouse from './Pages/educator/AddCouse.jsx'
 import MyCourses from './Pages/educator/MyCourses.jsx'
 import StudentsEnrolled from './Pages/educator/StudentsEnrolled.jsx'
 import NavBar from './Components/Student/NavBar.jsx'
+import "quill/dist/quill.snow.css";
 
 const App = () => {
 
@@ -32,7 +33,7 @@ const App = () => {
 
 
         <Route path='/educator' element={<Educator />}>
-          <Route path='educator' element={<Dashboard/>}/>
+          <Route path='/educator' element={<Dashboard/>}/>
           <Route path='add-course' element={<AddCouse />}/>
           <Route path='my-courses' element={<MyCourses />}/>
           <Route path='student-enrolled' element={<StudentsEnrolled/>}/>
