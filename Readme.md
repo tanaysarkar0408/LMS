@@ -5,8 +5,49 @@ This is a full-stack Learning Management System (LMS) designed to facilitate onl
 
 ## Project Status
 - **Frontend**: Completed (built with React, Tailwind CSS, and Vite)
-- **Backend**: Planned (to be built with Node.js, Express, and MongoDB)
+- **Backend**: In Progress
+  - Express.js server setup with modern ES modules
+  - MongoDB integration with proper connection handling
+  - Clerk authentication webhook integration
+  - Basic API endpoints implemented
+  - Environment variable configuration
+  - Error handling middleware
 - **Deployment**: Not yet deployed
+
+## Current Backend Progress
+
+### Backend Infrastructure
+- Set up Express.js server with modern ES modules
+- Implemented MongoDB database connection with proper error handling
+- Configured environment variables for database and authentication
+- Added CORS middleware for secure cross-origin requests
+
+### Authentication
+- Integrated Clerk authentication system
+- Set up webhook handling for authentication events
+- Configured Clerk webhook secret in environment variables
+
+### API Endpoints
+- Implemented basic health check endpoint (`GET /`)
+- Set up Clerk webhook endpoint (`POST /clerk`)
+- Added proper request body parsing middleware
+
+### Project Structure
+```
+server/
+├── configs/
+│   └── mongodb.js         # MongoDB connection configuration
+├── controllers/
+│   └── webhooks.js        # Clerk webhook handlers
+├── models/
+│   └── user.js           # User model definition
+├── server.js              # Main server file
+└── .env                  # Environment variables
+```
+
+## Features (Planned)
+
+For detailed backend documentation, see: [Backend Documentation](./server/README.md)
 
 ## Features (Planned)
 - **Student Features**:
