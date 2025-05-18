@@ -20,23 +20,29 @@ export const clerkWebhooks = async (req,res)=>{
                     _id:data.id,
                     email : data.email_addresses[0].email_address,
                     name : data.first_name + " " + data.last_name,
-                    image_url : data.image_url,
+                    imageUrl : data.image_url,
                 }
                 
-                await User.create(userData);
-                res.json({message : "User created successfully"})
+                const user = await User.create(userData);
+                console.log('User created:', user);
+                res.json({ message: 'User created successfully', user })
                 break;
             }
 
             case 'user.updated':{
                 const userData =  {
-                    email : data.email_address[0].email_address,
+                    email : data.email_addresses[0].email_address,
                     name : data.first_name + " " + data.last_name,
-                    image_url : data.image_url,
+                    imageUrl : data.image_url,
                 }
                 
-                await User.findByIdAndUpdate(data.id,userData);
-                res.json({message : "User updated successfully"})
+                const user = await User.findByIdAndUpdate(
+                    data.id,
+                    userData,
+                    { new: true }
+                );
+                console.log('User updated:', user);
+                res.json({ message: 'User updated successfully', user })
                 break;
             }
 
