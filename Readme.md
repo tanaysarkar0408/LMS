@@ -79,7 +79,7 @@ To work on this project, ensure you have the following installed:
 The project is split into two main parts: the frontend (client) and the backend (server). Currently, only the frontend is available.
 
 ### Frontend Setup
-The frontend is already developed. For detailed setup instructions, refer to the [Client README](./client/README.md).
+The frontend is already developed. For detailed setup instructions, refer to the [Client Documentation](./client/README.md).
 
 1. Navigate to the `client` directory:
    ```bash
