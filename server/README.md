@@ -7,6 +7,7 @@ This is the backend server for the Learning Management System (LMS) built with E
 - Express.js server with modern ES modules
 - MongoDB database integration
 - Clerk authentication webhook integration
+- Stripe payment integration
 - RESTful API endpoints
 - Environment variable configuration
 
@@ -37,6 +38,8 @@ Create a `.env` file in the server directory with the following variables:
 ```
 MONGODB_URI=mongodb+srv://your_username:your_password@your_cluster.mongodb.net
 CLERK_WEBHOOK_SECRET=your_clerk_webhook_secret
+STRIPE_SECRET_KEY=your_stripe_secret_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
 PORT=5000
 ```
 
@@ -55,6 +58,16 @@ PORT=5000
 - Handles Clerk webhook events
 - Requires JSON body
 - Used for authentication events
+
+### POST /stripe
+- Handles Stripe webhook events
+- Requires raw JSON body
+- Processes payment events and updates user status
+
+### POST /purchase
+- Initiates course purchase flow
+- Creates Stripe checkout session
+- Redirects to Stripe checkout page
 
 ## Database
 

@@ -45,8 +45,17 @@ server/
 └── .env                  # Environment variables
 ```
 
-## Features (Planned)
+## Features
 
+### Current Features
+- **Payment Integration**:
+  - Secure payment processing with Stripe
+  - Course purchase functionality
+  - Payment session management
+  - Webhook integration for payment events
+  - Secure checkout flow
+
+### Additional Features
 For detailed backend documentation, see: [Backend Documentation](./server/README.md)
 
 ## Features (Planned)

@@ -15,6 +15,7 @@ dist-ssr
 .public
 assets/
 
+sample-course-data.json
 
 # Editor directories and files
 .vscode/*
