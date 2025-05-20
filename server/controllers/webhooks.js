@@ -88,7 +88,7 @@ export const stripeWebhooks = async (request,response)=>{
         const paymentIntent = event.data.object;
         const paymentIntendId = paymentIntent.id;
 
-        const session = await stripeInstance.paymentIntents.checkout.sessions.list({
+        const session = await stripeInstance.checkout.sessions.list({
             payment_intent : paymentIntendId
         })
 
@@ -119,7 +119,7 @@ export const stripeWebhooks = async (request,response)=>{
             const paymentIntent = event.data.object;
             const paymentIntendId = paymentIntent.id;
 
-            const session = await stripeInstance.paymentIntents.checkout.sessions.list({
+            const session = await stripeInstance.checkout.sessions.list({
                 payment_intent : paymentIntendId
             })
 
