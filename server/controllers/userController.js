@@ -70,7 +70,9 @@ export const purchaseCourse = async (req,res) => {
 
         const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-        const currency = process.env.CURRENCY.toLowerCase();    
+        const currency = process.env.CURRENCY.toLowerCase(); 
+        
+        
         // Creating line items for stripe
 
         const line_items = [
@@ -80,13 +82,13 @@ export const purchaseCourse = async (req,res) => {
                     product_data : {
                         name : courseData.courseTitle
                     },
-                    unit_amount : Math.floor(Number(amount) * 100)  // Ensure we're using a number here
+                    unit_amount : Math.floor(Number(newPurchase.amount) * 100)  // Ensure we're using a number here
                 },
                 quantity : 1
             }
         ]
 
-        const session = await stripeInstance.checkout.sessions.create({
+        const session = await stripeInstance.checkout.sessions.create({ 
             success_url : `${origin}/loading/my-enrollements`,
             cancel_url : `${origin}/`,
             line_items: line_items,

@@ -70,9 +70,15 @@ export const clerkWebhooks = async (req,res)=>{
 
 const stripeInstance = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-export const stripeWebhooks = async (req, res) => {
-    const sig = req.headers['stripe-signature'];
-    const rawBody = req.body;
+export const stripeWebhooks = async (request, response) => {
+    const sig = request.headers['stripe-signature'];
+    const rawBody = request.body;
+    
+    // Check if webhook secret is configured
+    if (!process.env.STRIPE_WEBHOOK_SECRET) {
+        console.error('Stripe webhook secret is not configured');
+        return response.status(500).json({ error: 'Stripe webhook secret is not configured' });
+    }
     
     try {
         // Verify the webhook signature
@@ -125,11 +131,11 @@ export const stripeWebhooks = async (req, res) => {
                     await purchaseData.save();
                     console.log('Purchase data saved');
                     
-                    res.status(200).json({ message: 'Payment processed successfully' });
+                    response.status(200).json({ message: 'Payment processed successfully' });
                     
                 } catch (error) {
                     console.error('Error processing payment:', error);
-                    res.status(500).json({ error: error.message });
+                    response.status(500).json({ error: error.message });
                 }
                 break;
             
@@ -149,21 +155,21 @@ export const stripeWebhooks = async (req, res) => {
                     purchaseData.status = "failed";
                     await purchaseData.save();
                     
-                    res.status(200).json({ message: 'Payment failed' });
+                    response.status(200).json({ message: 'Payment failed' });
                     
                 } catch (error) {
                     console.error('Error handling failed payment:', error);
-                    res.status(500).json({ error: error.message });
+                    response.status(500).json({ error: error.message });
                 }
                 break;
 
             default:
                 console.log(`Unhandled event type ${event.type}`);
-                res.status(200).json({ message: 'Unhandled event type' });
+                response.status(200).json({ message: 'Unhandled event type' });
                 break;
         }
     } catch (err) {
         console.error('Error verifying webhook signature:', err);
-        res.status(400).json({ error: 'Invalid webhook signature' });
+        response.status(400).json({ error: 'Invalid webhook signature' });
     }
 };
