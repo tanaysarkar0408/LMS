@@ -18,16 +18,27 @@ await connectCloudinary()
 
 // Middleware
 app.use(cors());
+app.use(express.json()); 
 app.use(clerkMiddleware())
 
-//  routes
+// API routes
 app.get('/', (req, res) => {res.send("API Working")})
-app.post('/clerk',express.json(), clerkWebhooks)
-app.use('/api/educator', express.json(), educatorRouter)
-app.use('/api/course', express.json(), courseRouter)    
-app.use('/api/user', express.json(), userRouter)
-app.post('/stripe',express.raw({type : 'application/json'}),stripeWebhooks)
+app.post('/clerk', clerkWebhooks)
+app.use('/api/educator', educatorRouter)
+app.use('/api/course', courseRouter)    
+app.use('/api/user', userRouter)
+app.post('/stripe', express.raw({type : 'application/json'}), stripeWebhooks)
 
+// Handle any other routes
+app.use((req, res) => {
+    res.status(404).json({ error: 'Not Found' });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    res.status(400).json({ error: 'Bad Request' });
+});
 
 // Start server
 const PORT = process.env.PORT || 5000;
