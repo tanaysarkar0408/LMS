@@ -1,5 +1,7 @@
 # Learning Management System (LMS)
 
+🔗 [Live Demo](https://lms-by-tanay.vercel.app/)
+
 ## Overview
 This is a full-stack Learning Management System (LMS) designed to facilitate online education. The platform allows students to browse and enroll in courses, manage their enrollments, and interact with educational content, while educators can create and manage courses. The project is currently in development, with the frontend already built and the backend planned for future implementation.
 
