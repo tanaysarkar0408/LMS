@@ -13,7 +13,7 @@ import MyCourses from './Pages/educator/MyCourses.jsx'
 import StudentsEnrolled from './Pages/educator/StudentsEnrolled.jsx'
 import "quill/dist/quill.snow.css";
 import { ToastContainer } from "react-toastify";
-import NavBar from './Components/Student/NavBar.jsx'
+import NavBar from '../src/Components/Student/NavBar.jsx'
 
 
 const App = () => {
