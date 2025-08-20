@@ -1,5 +1,5 @@
 import React from 'react'
-import { assets, dummyEducatorData } from '../../assets/assets'
+import { assets, dummyEducatorData } from '../../assets/assets.js'
 import {UserButton, useUser} from '@clerk/clerk-react'
 import { useContext } from 'react'
 import { AppContext } from '../../Context/AppContext'

@@ -3,7 +3,7 @@ import { AppContext } from '../../Context/AppContext'
 import Loading from '../../Components/Student/Loading'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { dummyStudentEnrolled } from '../../assets/assets'
+import { dummyStudentEnrolled } from '../../assets/assets.js'
 
 const StudentsEnrolled = () => {
 

@@ -1,4 +1,4 @@
-import { assets } from "../../assets/assets";
+import { assets } from "../../assets/assets.js";
 import SearchBar from "./SearchBar";
 
 const Hero = () => {

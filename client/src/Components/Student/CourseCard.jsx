@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { assets } from "../../assets/assets";
+import { assets } from "../../assets/assets.js";
 import { AppContext } from "../../Context/AppContext";
 import { Link } from "react-router-dom";
 

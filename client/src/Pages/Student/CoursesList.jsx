@@ -4,7 +4,7 @@ import SearchBar from '../../Components/Student/SearchBar';
 import { useParams } from 'react-router-dom';
 import CourseCard from '../../Components/Student/CourseCard';
 import { useState } from 'react';
-import { assets } from '../../assets/assets';
+import { assets } from '../../assets/assets.js';
 import Footer from '../../Components/Student/Footer';
 
 const CoursesList = () => {
