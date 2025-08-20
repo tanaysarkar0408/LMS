@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import uniqid from 'uniqid'
 import Quill from 'quill'
-import { assets } from '../../assets/assets.js';
+import { assets } from '../../../src/assets/assets.js';
 import { useContext } from 'react';
 import { AppContext } from '../../Context/AppContext';
 import { toast } from 'react-toastify';

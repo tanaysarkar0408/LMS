@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../../Context/AppContext";
 import Loading from "../../Components/Student/Loading";
-import { assets } from "../../assets/assets.js";
+import { assets } from "../../../src/assets/assets.js";
 import humanizeDuration from "humanize-duration";
 import Footer from "../../Components/Student/Footer";
 import YouTube from "react-youtube";

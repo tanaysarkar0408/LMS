@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../../Context/AppContext";
 import { useParams } from "react-router-dom";
-import { assets } from "../../assets/assets.js";
+import { assets } from "../../../src/assets/assets.js";
 import humanizeDuration from "humanize-duration";
 import YouTube from "react-youtube";
 import Footer from "../../Components/Student/Footer";
