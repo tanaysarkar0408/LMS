@@ -2,6 +2,7 @@ import {clerkClient } from "@clerk/express";
 import Course from "../models/Course.js";
 import cloudinary from "../configs/cloudinary.js";
 import Purchase from "../models/purchase.js";
+import User from "../models/user.js";
 
 // API controller function to update role to educator
 export const updateRoleToEducator = async (req,res) => { 
@@ -124,7 +125,7 @@ export const getEnrolledStudentsData = async (req,res) => {
             courseTitle : purchase.courseId.courseTitle,
             purchaseDate : purchase.createdAt
         }));
-        res.json({success : true,courses})
+        res.json({success : true,enrolledStudentsData})
 
 
     } catch (error) {

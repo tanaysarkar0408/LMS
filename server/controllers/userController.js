@@ -3,6 +3,7 @@ import Course from "../models/Course.js";
 import Purchase from "../models/purchase.js";
 import User from "../models/user.js";
 import { courseProgress } from "../models/CourseProgress.js";
+import mongoose from 'mongoose';
 
 export const getUserData = async (req,res) => {
     try {
@@ -47,6 +48,8 @@ export const purchaseCourse = async (req,res) => {
         const courseData = await Course.findById(courseId);
 
         if(!userData ||!courseData){
+            console.log('User Data:', userData ? 'Found' : 'Not found');
+            console.log('Course Data:', courseData ? 'Found' : 'Not found');
             return res.json({success : false,message : "Data not found"})
         }
         
@@ -90,7 +93,7 @@ export const purchaseCourse = async (req,res) => {
         ]
 
         const session = await stripeInstance.checkout.sessions.create({ 
-            success_url : `${origin}/loading/my-enrollements`,
+            success_url : `${origin}/loading/my-enrollments`,
             cancel_url : `${origin}/`,
             line_items: line_items,
             mode : 'payment',

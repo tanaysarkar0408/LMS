@@ -3,13 +3,37 @@ import { assets } from "../../assets/assets";
 import { Link } from "react-router-dom";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { AppContext } from "../../Context/AppContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const NavBar = () => {
   const isCourseListPage = location.pathname.includes("/courses-list");
 
   const { openSignIn } = useClerk();
   const { user } = useUser();
-  const {navigate, isEducator} = useContext(AppContext)
+  const {navigate, isEducator, backendUrl, setIsEducator,getToken} = useContext(AppContext)
+
+
+  const becomeEducator = async ()=>{
+    try {
+      if(isEducator){
+        navigate('/educator')
+        return;
+      }
+      const token = await getToken();
+      const {data} = await axios.get(backendUrl + '/api/educator/update-role', {headers:
+        {Authorization: `Bearer ${token}`}})
+        if(data.success){
+          setIsEducator(true)
+          toast.success(data.message)
+        }else{
+          toast.error(data.message)
+        }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  } 
+
 
   return (
     <div
@@ -21,7 +45,7 @@ const NavBar = () => {
         navigate('/')
         scrollTo(0,0)
       }} className="font-semi-bold w-28 lg:w-32 cursor-pointer">
-        L M S by TANAY
+        ⚡L M S by TANAY
       </h1>
 
       {/* <img
@@ -33,10 +57,7 @@ const NavBar = () => {
         <div className="flex items-center gap-5">
           {user && (
             <>
-              <button onClick={() => {
-                navigate("/educator");
-                scrollTo(0, 0);
-              }} >{isEducator ? 'Educator Dashboard': 'Become Educator'}</button>
+              <button onClick={becomeEducator} >{isEducator ? 'Educator Dashboard': 'Become Educator'}</button>
               <Link to={"/my-enrollments"}> My Enrollments</Link>
             </>
           )}
@@ -57,10 +78,7 @@ const NavBar = () => {
         <div className="flex items-center gap-1 sm:gap-2 max-sm:text-xs">
           {user && (
             <>
-                 <button onClick={() => {
-                navigate("/educator");
-                scrollTo(0, 0);
-              }} >{isEducator ? 'Educator Dashboard': 'Become Educator'}</button>
+                 <button onClick={becomeEducator} >{isEducator ? 'Educator Dashboard': 'Become Educator'}</button>
               <Link to={"/my-enrollments"}> My Enrollments</Link>
             </>
           )}

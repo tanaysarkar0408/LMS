@@ -6,6 +6,8 @@ import { assets } from "../../assets/assets";
 import humanizeDuration from "humanize-duration";
 import Footer from "../../Components/Student/Footer";
 import YouTube from "react-youtube";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const CourseDetails = () => {
   const { id } = useParams();
@@ -21,17 +23,73 @@ const CourseDetails = () => {
     calculateChapterTime,
     calculateCourseDuration,
     calculateNoOfLectures,
-    currency
+    currency,
+    backendUrl,
+    userData,
+    getToken
   } = useContext(AppContext);
 
-  const fetchCourseData = async () => {
-    const findCourse = await allCourses.find((course) => course._id === id);
-    setCourseData(findCourse);
-  };
+  // const fetchCourseData = async () => {
+  //   const findCourse = await allCourses.find((course) => course._id === id);
+  //   setCourseData(findCourse);
+  // };
 
+
+  const fetchCourseData = async () => {
+    try {
+      const {data} = await axios.get(`${backendUrl}/api/course/${id}`);
+      if(data.success){
+        setCourseData(data.courseData);
+      }else{
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+  
+  const enrollCourse = async () => {
+    try {
+      if (!userData) {
+        return toast.warning("Please login to enroll in the course");
+      }
+      if (isAlreadyEnrolled) {
+        return toast.warning("You are already enrolled in this course");
+      }
+      const token = await getToken();
+      const { data } = await axios.post(
+        `${backendUrl}/api/user/purchase`,
+        { courseId: courseData._id },
+        { 
+          headers: { 
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}` 
+          }
+        }
+      );
+      
+      if (data.success && data.sessionUrl) {
+        // Redirect to Stripe Checkout
+        window.location.href = data.sessionUrl;
+      } else {
+        toast.error(data.message || 'Failed to process payment');
+      }
+    } catch (error) {
+      console.error('Enrollment error:', error);
+      toast.error(error.response?.data?.message || error.message || 'An error occurred during enrollment');
+    }
+  };
+  
   useEffect(() => {
     fetchCourseData();
-  }, [allCourses]);
+  }, []);
+
+
+  useEffect(() => {
+    if(userData && courseData){
+      setIsAlreadyEnrolled(userData.enrolledCourses.includes(courseData._id))
+    }
+  }, [userData, courseData]);
 
   const toggleSection = (index) => {
     setOpenSection((prev) => ({
@@ -87,11 +145,12 @@ const CourseDetails = () => {
           </div>
           <p className="text-sm">
             Course by{" "}
-            <span className="text-blue-600 underline">Tanay Sakar</span>
+            <span className="text-blue-600 underline">{courseData.educator == null ? "Tanay Sakar" : courseData.educator.name}</span>
           </p>
           <div className="pt-8 text-gray-800">
             <h2 className="text-xl font-semibold">Course Structure</h2>
             <div className="pt-5">
+              {console.log("courseData",courseData)}
               {courseData.courseContent.map((chapter, index) => (
                 <div
                   key={index}
@@ -225,7 +284,7 @@ const CourseDetails = () => {
 
 
             </div>
-            <button className="md:mt-6 mt-4 w-full py-3 rounded bg-blue-600 text-white font-medium">
+            <button onClick={enrollCourse} className="md:mt-6 mt-4 w-full py-3 rounded bg-blue-600 text-white font-medium">
               {isAlreadyEnrolled ? 'ALready Enrolled' : 'Enroll now'}</button>
               <div className="pt-6">
                 <p className="md:text-xl text-lg font-medium text-gray-800">What's in the course?</p>

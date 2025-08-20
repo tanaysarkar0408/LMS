@@ -1,20 +1,37 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { dummyStudentEnrolled } from '../../assets/assets'
 import { AppContext } from '../../Context/AppContext'
 import Loading from '../../Components/Student/Loading'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import { dummyStudentEnrolled } from '../../assets/assets'
 
 const StudentsEnrolled = () => {
 
+  const {backendUrl,getToken,isEducator} = useContext(AppContext)
   const [enrolledStudents, setEnrolledStudents] = useState(null)
   
   const fetchEnrolledStudents = async () =>{
-    setEnrolledStudents(dummyStudentEnrolled)
+    // setEnrolledStudents(dummyStudentEnrolled);
+    try {
+      const token = await getToken()
+      const { data } = await axios.get(backendUrl + '/api/educator/enrolled-students', {
+        headers : { Authorization : `Bearer ${token}` }})
+      if(data.success){
+        setEnrolledStudents(data.enrolledStudentsData.reverse())
+      }else{
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
   }
 
 
   useEffect(() =>{
-    fetchEnrolledStudents()
-  },[])
+    if(isEducator){
+      fetchEnrolledStudents()
+    }
+  },[isEducator])
 
 
   return enrolledStudents ? (
