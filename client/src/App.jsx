@@ -11,9 +11,10 @@ import Dashboard from './Pages/educator/Dashboard.jsx'
 import AddCouse from './Pages/educator/AddCouse.jsx'
 import MyCourses from './Pages/educator/MyCourses.jsx'
 import StudentsEnrolled from './Pages/educator/StudentsEnrolled.jsx'
-import NavBar from './Components/Student/NavBar.jsx'
+import Navbar from './Components/Student/Navbar.jsx'
 import "quill/dist/quill.snow.css";
 import { ToastContainer } from "react-toastify";
+import NavBar from './Components/Student/Navbar.jsx'
 
 const App = () => {
 
