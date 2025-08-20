@@ -26,3 +26,4 @@ assets/
 *.njsproj
 *.sln
 *.sw?
+.vercel

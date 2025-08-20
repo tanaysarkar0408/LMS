@@ -6,7 +6,7 @@ import { AppContext } from "../../Context/AppContext";
 import axios from "axios";
 import { toast } from "react-toastify";
 
-const NavBar = () => {
+const Navbar = () => {
   const isCourseListPage = location.pathname.includes("/courses-list");
 
   const { openSignIn } = useClerk();
@@ -95,4 +95,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navbar;
