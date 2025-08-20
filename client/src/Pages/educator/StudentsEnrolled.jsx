@@ -3,7 +3,6 @@ import { AppContext } from '../../Context/AppContext'
 import Loading from '../../Components/Student/Loading'
 import axios from 'axios'
 import { toast } from 'react-toastify'
-import { dummyStudentEnrolled } from '../../assets/assets.js'
 
 const StudentsEnrolled = () => {
 
@@ -11,7 +10,6 @@ const StudentsEnrolled = () => {
   const [enrolledStudents, setEnrolledStudents] = useState(null)
   
   const fetchEnrolledStudents = async () =>{
-    // setEnrolledStudents(dummyStudentEnrolled);
     try {
       const token = await getToken()
       const { data } = await axios.get(backendUrl + '/api/educator/enrolled-students', {
